@@ -10,13 +10,13 @@ import json
 import fire
 
 
+
 def segment(input, to_string=False):
     input = list(pyhanlp.HanLP.segment(input))
     if to_string:
         return ' '.join([i.toString().split('/')[0] for i in input])
     else:
         return [i.toString().split('/')[0] for i in input]
-
 
 
 class Preprocessor(object):
@@ -49,7 +49,6 @@ class Preprocessor(object):
                                     words = segment(i, True).strip()
                                     if len(words.split(' ')) > 5:
                                         writer.write('<SOS>' + ' ' + words + ' ' + '。 <EOS>' + '\n')
-
 
     def get_corpus_counter(self):
         """
@@ -116,7 +115,7 @@ class Preprocessor(object):
         try:
             return self.vocabulary[token]
         except:
-            return 1
+            return self.vocabulary['<UNK>']
 
     def save(self, path=None):
         #TODO: use class name as save name
@@ -126,15 +125,13 @@ class Preprocessor(object):
             pk.dump(self, open(path, 'wb'))
 
 
-
-
-
 def test():
-    pr = Preprocessor()
+    pr = Preprocessor(test=True)
     pr.pipeline_process_raw()
     pr.pipeline_gen_w2v()
     pr.pipeline_gen_trainset()
     pr.save()
+
 
 def run():
     pr = Preprocessor(test=False)
@@ -143,6 +140,4 @@ def run():
     pr.pipeline_gen_trainset()
     pr.save()
 
-if __name__ == '__main__':
-    fire.Fire()
-
+test()
