@@ -1,6 +1,6 @@
 import torch as t
 import Blocks
-
+from Blocks import RNN
 
 def loss(logits, target):
     loss = None
@@ -13,6 +13,7 @@ class ELMO(t.nn.Module):
         self.max_lenth = 40
         self.model = getattr(Blocks, encoder)()
         self.embedding = t.nn.Embedding(matrix.size()[0], matrix.size()[1])
+        self.elmo_rnn = RNN()
 
     def forward(self, inputs):
         pass

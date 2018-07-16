@@ -10,6 +10,8 @@
           <excludedPaths>
             <excludedPath local="true" path="$PROJECT_DIR$/raw" />
             <excludedPath local="true" path="$PROJECT_DIR$/processed" />
+            <excludedPath path="/projects/elmo/raw" />
+            <excludedPath path="/projects/elmo/processed" />
           </excludedPaths>
         </serverdata>
       </paths>
