@@ -4,6 +4,7 @@ import os
 import shutil
 import pyhanlp
 import re
+from Vocab import Vocab
 
 
 def clean(input):
@@ -20,6 +21,7 @@ def segment(input):
 
 
 def preprocess(test=False):
+
     middle_path = 'raw/middle/'
     if os.path.exists(middle_path):
         shutil.rmtree(middle_path)
@@ -49,8 +51,13 @@ def preprocess(test=False):
 
     df = pd.DataFrame({'text': texts, 'seg': segs, 'pos': poss})
     df = df[df.seg.apply(len) > 6]
-    df.to_csv(middle_path+'middle.csv')
+    df.to_json(middle_path + 'middle.json')
     print(f'middle file saved to {middle_path}')
 
 
 preprocess(test=True)
+vocab = Vocab()
+vocab.build_vocab()
+vocab.save()
+
+
