@@ -4,7 +4,10 @@ import os
 import shutil
 import pyhanlp
 import re
+<<<<<<< HEAD
 from Vocab import Vocab
+=======
+>>>>>>> origin/master
 
 
 def clean(input):
@@ -14,6 +17,10 @@ def clean(input):
 
 def segment(input):
     input = clean(input)
+<<<<<<< HEAD
+=======
+    print(input)
+>>>>>>> origin/master
     input = list(pyhanlp.HanLP.segment(input))
     seg = [i.toString().split('/')[0] for i in input]
     pos = [i.toString().split('/')[1] for i in input]
@@ -21,7 +28,10 @@ def segment(input):
 
 
 def preprocess(test=False):
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     middle_path = 'raw/middle/'
     if os.path.exists(middle_path):
         shutil.rmtree(middle_path)
@@ -51,6 +61,7 @@ def preprocess(test=False):
 
     df = pd.DataFrame({'text': texts, 'seg': segs, 'pos': poss})
     df = df[df.seg.apply(len) > 6]
+<<<<<<< HEAD
     df.to_json(middle_path + 'middle.json')
     print(f'middle file saved to {middle_path}')
 
@@ -61,3 +72,10 @@ vocab.build_vocab()
 vocab.save()
 
 
+=======
+    df.to_csv(middle_path+'middle.csv')
+    print(f'middle file saved to {middle_path}')
+
+
+preprocess(test=True)
+>>>>>>> origin/master
